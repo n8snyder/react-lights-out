@@ -19,7 +19,7 @@ import "./Board.css";
  *       O  O  .     (where . is off, and O is on)
  *       .  .  .
  *
- *    This would be: [[f, f, f], [t, t, f], [f, f, f]]
+ *    This would be: [[f[0][0], f, f], [t[1][0], t, f], [f, f, f]]
  *
  *  This should render an HTML table of individual <Cell /> components.
  *
@@ -33,7 +33,14 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+    
+    for(let y = 0; y < ncols; y++){
+      let col = [];
+      for(let x = 0; x < nrows; x++){
+        col.push(Math.random() > 0.5 ? true : false);
+      }
+      initialBoard.push(col);
+    }
     return initialBoard;
   }
 
