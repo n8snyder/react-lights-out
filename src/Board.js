@@ -34,9 +34,9 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   function createBoard() {
     let initialBoard = [];
 
-    for (let y = 0; y < ncols; y++) {
+    for (let x = 0; x < nrows; x++) {
       let col = [];
-      for (let x = 0; x < nrows; x++) {
+      for (let y = 0; y < ncols; y++) {
         col.push(Math.random() < chanceLightStartsOn ? true : false);
       }
       initialBoard.push(col);
@@ -45,9 +45,9 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function hasWon() {
-    for (let y = 0; y < ncols; y++) {
-      for (let x = 0; x < nrows; x++) {
-        if (board[y][x] === true) {
+    for (let x = 0; x < nrows; x++) {
+      for (let y = 0; y < ncols; y++) {
+        if (board[x][y] === true) {
           return false;
         }
       }
@@ -82,23 +82,39 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   // make table board
 
   //cols is an array
-  function makeRows(row){
+  // function makeCols([row, x) {
+  //   return (
+  //     <tr>
+  //       {row.map((cell, y) => {
+  //         return <Cell flipCellsAroundMe={() => flipCellsAround(`${y}-${x}`)} isLit={cell} />
+  //       })}
+  //     </tr>
+  //   )
+  // }
+
+
+  function makeHTMLGrid() {
     return (
-    <tr>
-      {row.map(row => <Cell />)}
-    </tr>
-    )
+      <table className="Board-table">
+        {board.map((row, x) => {
+          return (
+            <tr>
+              {row.map((cell, y) => {
+                return <Cell flipCellsAroundMe={() => flipCellsAround(`${y}-${x}`)} isLit={cell} />
+              })}
+            </tr>
+          )
+        })}
+      </table>
+    );
   }
-   
-  
+
 
 
   // TODO
   return (
     <div className="Board">
-      <table className="Board-table">
-       {board.map()}
-      </table>
+      {makeHTMLGrid()}
     </div>
   );
 }
