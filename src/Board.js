@@ -81,8 +81,47 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   // make table board
 
+  //cols is an array
+  function makeRows(row){
+    return (
+    <tr>
+      {row.map(row => <Cell />)}
+    </tr>
+    )
+  }
+   
+  
+
+
   // TODO
-  return board;
+  return (
+    <div className="Board">
+      <table className="Board-table">
+       {board.map()}
+      </table>
+    </div>
+  );
 }
+
+/** 
+<table>
+  <tr> aka board[0]
+    <Cell />(<td></td>) board[0][0]
+    <td></td> board[0][1]
+    <td></td> board[0][2]
+  </tr>
+  <tr> board[1]
+    <td></td> board[1][0]
+    <td></td> board[1][1]
+    <td></td> board[1][2]
+  </tr>
+  <tr> board[2]
+    <td></td> board[2][0]
+    <td></td> board[2][1]
+    <td></td> board[2][2]
+  </tr>
+
+</table>
+*/
 
 export default Board;
