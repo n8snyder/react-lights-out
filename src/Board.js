@@ -33,11 +33,11 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    
-    for(let y = 0; y < ncols; y++){
+
+    for (let y = 0; y < ncols; y++) {
       let col = [];
-      for(let x = 0; x < nrows; x++){
-        col.push(Math.random() > 0.5 ? true : false);
+      for (let x = 0; x < nrows; x++) {
+        col.push(Math.random() < chanceLightStartsOn ? true : false);
       }
       initialBoard.push(col);
     }
@@ -45,7 +45,14 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+    for (let y = 0; y < ncols; y++) {
+      for (let x = 0; x < nrows; x++) {
+        if (board[y][x] === true) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   function flipCellsAround(coord) {
@@ -75,6 +82,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   // make table board
 
   // TODO
+  return board;
 }
 
 export default Board;
